@@ -1,1 +1,111 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+$md-darkteal: (
+    50 : #e1ecec,
+    100 : #b4cece,
+    200 : #82aeae,
+    300 : #4f8e8e,
+    400 : #2a7575,
+    500 : #045d5d,
+    600 : #035555,
+    700 : #034b4b,
+    800 : #024141,
+    900 : #013030,
+    A100 : #69ffff,
+    A200 : #36ffff,
+    A400 : #03ffff,
+    A700 : #00e8e8,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-coral: (
+    50 : #fef0ef,
+    100 : #fddad7,
+    200 : #fcc1bc,
+    300 : #faa8a1,
+    400 : #f9968d,
+    500 : #f88379,
+    600 : #f77b71,
+    700 : #f67066,
+    800 : #f5665c,
+    900 : #f35349,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffe5e4,
+    A700 : #ffcdca,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$atm-ui-primary: mat.define-palette($md-darkteal);
+$atm-ui-accent: mat.define-palette($md-coral);
+
+// The warn palette is optional (defaults to red).
+$atm-ui-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$atm-ui-theme: mat.define-light-theme((
+  color: (
+    primary: $atm-ui-primary,
+    accent: $atm-ui-accent,
+    warn: $atm-ui-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($atm-ui-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
