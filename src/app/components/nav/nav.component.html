@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" class="atm-toolbar">
+    <h1>ATM</h1>
+
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <h2><ng-content></ng-content></h2>
+
+    <nav>
+        <button mat-button routerLink="/" routerLinkActive="atm-active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
+        <button mat-button routerLink="/withdraw" routerLinkActive="atm-active">Withdraw</button>
+        <button mat-button routerLink="/restock" routerLinkActive="atm-active">Restock</button>
+    </nav>
+
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <button mat-flat-button class="atm-login" color="accent" *ngIf="!loggedIn; else loggedOutTemplate">Login</button>
+
+    <ng-template #loggedOutTemplate>
+        <button mat-flat-button class="atm-logout" color="warn">Logout</button>
+    </ng-template>
+</mat-toolbar>

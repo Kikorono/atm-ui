@@ -13,8 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule
+        BrowserAnimationsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

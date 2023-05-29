@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import '../../../theme';
+
+
+$color-config: mat.get-color-config($atm-ui-theme);
+$accent-palette: map.get($color-config, 'accent');
+$warn-palette: map.get($color-config, 'warn');
+
+.atm-toolbar {
+    display: flex;
+
+    h1, h2 {
+        font-weight: 400;
+    }
+
+    .mat-divider {
+        margin: 0 12px 0 12px;
+        height: 70%;
+        border-right-color: rgba(255, 255, 255, .15)
+    }
+
+    h2 {
+        flex: 1;
+    }
+
+    button {
+        margin-left: 4px;
+
+        &.atm-active, &:hover {
+            background: rgba(255, 255, 255, .15);
+        }
+
+        &.atm-login {
+            &:hover {
+                background: mat.get-color-from-palette($accent-palette, 300);
+            }
+        }
+
+        &.atm-logout {
+            &:hover {
+                background: mat.get-color-from-palette($warn-palette, 300);
+            }
+        }
+    }
+}
