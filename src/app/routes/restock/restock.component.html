@@ -1,3 +1,45 @@
-<atm-nav>
-    Restock
-</atm-nav>
+<div class="atm-page atm-restock">
+    <atm-nav>
+        Restock
+    </atm-nav>
+
+    <main class="atm-one-third">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Restock</mat-card-title>
+            </mat-card-header>
+
+            <form (submit)="updateStock()">
+                <mat-card-content class="atm-card-content">
+                    <table mat-table [dataSource]="stockDataSource">
+                        <!-- Bill Column -->
+                        <ng-container matColumnDef="bill">
+                            <th mat-header-cell *matHeaderCellDef> Bill </th>
+                            <td mat-cell *matCellDef="let element"> ${{element.bill}} </td>
+                        </ng-container>
+
+                        <!-- Stock Column -->
+                        <ng-container matColumnDef="stock">
+                            <th mat-header-cell *matHeaderCellDef> Stock </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-form-field appearance="outline" class="atm-stock-field atm-no-hint atm-field-sm">
+                                    <input matInput type="number" [name]="'atm-bill-' + element.bill"
+                                           [(ngModel)]="element.stock" (ngModelChange)="fieldUpdated()">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="stockDisplayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: stockDisplayedColumns;"></tr>
+                    </table>
+
+                    <mat-divider></mat-divider>
+                </mat-card-content>
+
+                <mat-card-actions class="atm-card-actions">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="submitDisabled">Update</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </main>
+</div>

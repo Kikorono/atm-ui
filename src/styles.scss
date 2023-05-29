@@ -29,22 +29,28 @@ body {
 
 main {
     padding: 24px 12px;
-    max-width: 960px;
-    width: 100%;
     margin: 0 auto;
-    box-sizing: border-box;
-
-    &.atm-md {
-        max-width: 640px;
-    }
-
-    &.atm-sm {
-        max-width: 480px;
-    }
 }
 
-.mdc-button {
-    text-transform: uppercase;
+main, .atm-full, .atm-two-thirds, .atm-half, .atm-one-third {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+main, .atm-full {
+    max-width: 960px;
+}
+
+.atm-two-thirds {
+    max-width: 640px;
+}
+
+.atm-half {
+    max-width: 480px;
+}
+
+.atm-one-third {
+    max-width: 320px;
 }
 
 .atm-page {
@@ -52,6 +58,20 @@ main {
     display: grid;
     grid-template-rows: auto 1fr;
     align-items: center;
+}
+
+.atm-no-hint .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+.atm-field-sm {
+    .mat-mdc-form-field-infix {
+        width: 100px;
+    }
+}
+
+.mdc-button {
+    text-transform: uppercase;
 }
 
 .mdc-card__actions.atm-card-actions {

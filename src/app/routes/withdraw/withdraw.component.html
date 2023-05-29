@@ -3,13 +3,13 @@
         Withdraw
     </atm-nav>
 
-    <main class="atm-sm">
-        <form>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Make a Withdrawal</mat-card-title>
-                </mat-card-header>
+    <main class="atm-half">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Make a Withdrawal</mat-card-title>
+            </mat-card-header>
 
+            <form>
                 <mat-card-content>
                     <mat-form-field appearance="outline" class="atm-withdraw-amount">
                         <mat-label>Amount to Withdraw</mat-label>
@@ -25,7 +25,7 @@
                 <mat-card-actions class="atm-card-actions">
                     <button mat-raised-button color="primary" [disabled]="submitDisabled">Submit</button>
                 </mat-card-actions>
-            </mat-card>
-        </form>
+            </form>
+        </mat-card>
     </main>
 </div>
