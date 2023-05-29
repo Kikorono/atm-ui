@@ -73,10 +73,11 @@ export class WithdrawComponent {
             successful
         };
 
+        this.atmRepository.addTransaction(transaction);
+
         if (successful) {
             // Success!
             this.transaction = transaction;
-            this.atmRepository.addTransaction(transaction);
             this.atmRepository.updateStock(currentStock);
             this.snackBar.open('Transaction successful', 'Close');
         } else {
