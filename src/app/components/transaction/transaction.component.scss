@@ -1,4 +1,13 @@
 .atm-transaction {
+    .atm-card-title {
+        display: flex;
+        align-items: center;
+
+        .atm-icon {
+            margin-right: 8px;
+        }
+    }
+
     .atm-card-content {
         padding: 0;
     }

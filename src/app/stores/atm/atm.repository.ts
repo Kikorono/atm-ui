@@ -52,4 +52,8 @@ export class AtmRepository {
         return atmStore.getValue().stock;
     }
 
+    getTransactions(): Transaction[] {
+        return atmStore.getValue().transactions;
+    }
+
 }

@@ -1,6 +1,9 @@
 <mat-card class="atm-transaction" *ngIf="transaction">
     <mat-card-header>
-        <mat-card-title>{{header}}</mat-card-title>
+        <mat-card-title class="atm-card-title">
+            <mat-icon class="atm-icon" *ngIf="icon" [color]="iconColor">{{icon}}</mat-icon>
+            {{header}}
+        </mat-card-title>
     </mat-card-header>
 
     <mat-card-content class="atm-card-content">

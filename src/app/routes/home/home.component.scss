@@ -1,0 +1,14 @@
+.atm-home {
+    .atm-card-content {
+        padding: 0;
+    }
+
+    .atm-transactions-title {
+        margin-top: 32px;
+    }
+
+    .atm-transaction-receipt + .atm-transaction-receipt {
+        margin-top: 16px;
+        display: block;
+    }
+}

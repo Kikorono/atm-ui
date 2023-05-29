@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 
 import { Transaction } from '../../model/transaction.model';
 import { BillStock } from '../../model/bill.model';
@@ -18,6 +19,12 @@ export class TransactionComponent implements OnChanges {
 
     @Input()
     header: string = 'Transaction';
+
+    @Input()
+    icon: string | null = null;
+
+    @Input()
+    iconColor: ThemePalette = 'primary';
 
     dataSource: BillStock[];
 

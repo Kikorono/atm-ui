@@ -28,7 +28,10 @@
             </form>
         </mat-card>
 
-        <atm-transaction [transaction]="transaction" header="Transaction Receipt">
+        <atm-transaction [transaction]="transaction"
+                         header="Transaction Successful"
+                         icon="check_circle"
+                         iconColor="primary">
             <mat-card-actions class="atm-card-actions">
                 <button mat-raised-button color="primary" (click)="transaction = null">New Transaction</button>
             </mat-card-actions>
@@ -36,7 +39,10 @@
 
         <mat-card *ngIf="transactionFailed" class="atm-transaction-failed">
             <mat-card-header>
-                <mat-card-title>Transaction Failed</mat-card-title>
+                <mat-card-title class="atm-transaction-title">
+                    <mat-icon color="warn" class="atm-icon">cancel</mat-icon>
+                    Transaction Failed
+                </mat-card-title>
             </mat-card-header>
 
             <mat-card-content class="atm-card-content">
