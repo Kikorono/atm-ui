@@ -1,37 +1,18 @@
-import { createStore, select, withProps } from '@ngneat/elf';
-import { Bill } from '../../model/bills.model';
+import { createStore, withProps } from '@ngneat/elf';
+import { BillStock, billTypes } from '../../model/bill.model';
+import { Transaction } from '../../model/transaction.model';
 
 export interface AtmState {
-    stock: Bill[];
+    stock: BillStock[];
+    transactions: Transaction[];
 }
 
 const defaultState: AtmState = {
-    stock: [
-        {
-            bill: 100,
-            stock: 10
-        },
-        {
-            bill: 50,
-            stock: 10
-        },
-        {
-            bill: 20,
-            stock: 10
-        },
-        {
-            bill: 10,
-            stock: 10
-        },
-        {
-            bill: 5,
-            stock: 10
-        },
-        {
-            bill: 1,
-            stock: 10
-        }
-    ]
+    stock: billTypes.map(bill => ({
+        bill,
+        amount: 10
+    })),
+    transactions: []
 };
 
 export const getStateFromStorage = (): AtmState | null => {
@@ -58,5 +39,3 @@ export const atmStore = createStore(
     { name: 'atm' },
     withProps<AtmState>(getStateFromStorage() || defaultState)
 );
-
-

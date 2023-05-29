@@ -3,4 +3,15 @@
         margin-top: 16px;
         width: 100%;
     }
+
+    .atm-transaction-failed {
+        .atm-card-content {
+            font-size: 18px;
+            padding: 24px 16px;
+        }
+
+        .atm-card-actions {
+            padding-top: 16px;
+        }
+    }
 }

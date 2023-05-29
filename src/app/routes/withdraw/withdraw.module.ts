@@ -7,10 +7,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { WithdrawRoutingModule } from './withdraw-routing.module';
 import { WithdrawComponent } from './withdraw.component';
 import { NavModule } from '../../components/nav/nav.module';
+import { TransactionModule } from '../../components/transaction/transaction.module';
 
 
 @NgModule({
@@ -25,8 +27,10 @@ import { NavModule } from '../../components/nav/nav.module';
         MatButtonModule,
         MatIconModule,
         MatInputModule,
+        MatSnackBarModule,
         WithdrawRoutingModule,
-        NavModule
+        NavModule,
+        TransactionModule
     ]
 })
 export class WithdrawModule {

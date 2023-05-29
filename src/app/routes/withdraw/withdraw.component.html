@@ -4,12 +4,12 @@
     </atm-nav>
 
     <main class="atm-half">
-        <mat-card>
+        <mat-card *ngIf="!transaction && !transactionFailed">
             <mat-card-header>
                 <mat-card-title>Make a Withdrawal</mat-card-title>
             </mat-card-header>
 
-            <form>
+            <form (submit)="submitWithdrawal()">
                 <mat-card-content>
                     <mat-form-field appearance="outline" class="atm-withdraw-amount">
                         <mat-label>Amount to Withdraw</mat-label>
@@ -23,9 +23,29 @@
                 </mat-card-content>
 
                 <mat-card-actions class="atm-card-actions">
-                    <button mat-raised-button color="primary" [disabled]="submitDisabled">Submit</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="submitDisabled">Submit</button>
                 </mat-card-actions>
             </form>
+        </mat-card>
+
+        <atm-transaction [transaction]="transaction" header="Transaction Receipt">
+            <mat-card-actions class="atm-card-actions">
+                <button mat-raised-button color="primary" (click)="transaction = null">New Transaction</button>
+            </mat-card-actions>
+        </atm-transaction>
+
+        <mat-card *ngIf="transactionFailed" class="atm-transaction-failed">
+            <mat-card-header>
+                <mat-card-title>Transaction Failed</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="atm-card-content">
+                The ATM has insufficient funds to fulfill your request, please try again or contact Customer Support.
+            </mat-card-content>
+
+            <mat-card-actions class="atm-card-actions">
+                <button mat-raised-button color="primary" (click)="reset()">New Transaction</button>
+            </mat-card-actions>
         </mat-card>
     </main>
 </div>

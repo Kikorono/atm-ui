@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { AtmRepository } from '../../stores/atm/atm.repository';
+
+import { BillStock, billTypes } from '../../model/bill.model';
+import { Transaction } from '../../model/transaction.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'atm-withdraw',
@@ -8,6 +13,83 @@ import { Component } from '@angular/core';
 export class WithdrawComponent {
 
     withdrawAmount: number | null = null;
+    transaction: Transaction | null = null;
+    transactionFailed: boolean = false;
+
+    constructor(
+        private atmRepository: AtmRepository,
+        private snackBar: MatSnackBar
+    ) {
+    }
+
+    submitWithdrawal(): void {
+        if (!this.withdrawAmount || this.withdrawAmount < 0) {
+            // User did not enter anything, entered 0, or entered a negative number -, don't do anything
+            return;
+        }
+
+        const currentStock = this.atmRepository.getStock();
+
+        const totalBills: BillStock[] = [];
+        let cashRemainder = this.withdrawAmount;
+
+        for (const bill of billTypes) {
+            const currentBill = currentStock.find(billStock => billStock.bill === bill);
+
+            // Bill not found, skip it
+            if (!currentBill) {
+                continue;
+            }
+
+            const currentBillStock = currentBill.amount || 0;
+
+            // No stock remaining for this bill, skip it
+            if (!currentBillStock) {
+                continue;
+            }
+
+            let billCount = Math.floor(cashRemainder / bill);
+            if (billCount > currentBillStock) {
+                billCount = currentBillStock;
+            }
+
+            currentBill.amount -= billCount;
+
+            const cashAmount = billCount * bill;
+            cashRemainder = cashRemainder - cashAmount;
+
+            if (billCount > 0) {
+                totalBills.push({
+                    bill,
+                    amount: billCount
+                })
+            }
+        }
+
+        const successful = cashRemainder === 0;
+
+        const transaction: Transaction = {
+            bills: totalBills,
+            successful
+        };
+
+        if (successful) {
+            // Success!
+            this.transaction = transaction;
+            this.atmRepository.addTransaction(transaction);
+            this.atmRepository.updateStock(currentStock);
+            this.snackBar.open('Transaction successful', 'Close');
+        } else {
+            // Error, not enough stock
+            this.transactionFailed = true;
+        }
+    }
+
+    reset(): void {
+        this.withdrawAmount = null;
+        this.transaction = null;
+        this.transactionFailed = false;
+    }
 
     get submitDisabled(): boolean {
         return this.withdrawAmount === null || this.withdrawAmount === 0;

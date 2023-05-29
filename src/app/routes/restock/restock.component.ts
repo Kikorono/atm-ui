@@ -1,26 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Bill } from '../../model/bills.model';
-import { AtmRepository } from '../../stores/atm/atm.repository';
+import { Component } from '@angular/core';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { BillStock } from '../../model/bill.model';
+import { AtmRepository } from '../../stores/atm/atm.repository';
 
 @Component({
     selector: 'atm-restock',
     templateUrl: './restock.component.html',
     styleUrls: ['./restock.component.scss']
 })
-export class RestockComponent implements OnInit {
+export class RestockComponent {
 
-    stockDisplayedColumns: string[] = ['bill', 'stock'];
-    stockDataSource: Bill[];
-    currentStock: Bill[] = [];
+    readonly stockDisplayedColumns: string[] = ['bill', 'stock'];
+
+    stockDataSource: BillStock[];
+    currentStock: BillStock[] = [];
     updated: boolean = false;
 
-    constructor(private atmRepository: AtmRepository, private snackBar: MatSnackBar) {
+    constructor(
+        private atmRepository: AtmRepository,
+        private snackBar: MatSnackBar
+    ) {
         this.stockDataSource = this.atmRepository.getStock();
         this.cloneStock();
-    }
-
-    ngOnInit(): void {
     }
 
     /**
@@ -31,7 +34,7 @@ export class RestockComponent implements OnInit {
         this.updated = false;
 
         for (let i = 0; i < this.currentStock.length; i++) {
-            if (this.currentStock[i].stock !== this.stockDataSource[i].stock) {
+            if (this.currentStock[i].amount !== this.stockDataSource[i].amount) {
                 this.updated = true;
                 break;
             }
@@ -49,7 +52,7 @@ export class RestockComponent implements OnInit {
     }
 
     cloneStock(): void {
-        this.currentStock = JSON.parse(JSON.stringify(this.stockDataSource)) as Bill[];
+        this.currentStock = JSON.parse(JSON.stringify(this.stockDataSource)) as BillStock[];
     }
 
     get submitDisabled(): boolean {

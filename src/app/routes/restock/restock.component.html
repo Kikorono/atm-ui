@@ -24,7 +24,7 @@
                             <td mat-cell *matCellDef="let element">
                                 <mat-form-field appearance="outline" class="atm-stock-field atm-no-hint atm-field-sm">
                                     <input matInput type="number" [name]="'atm-bill-' + element.bill"
-                                           [(ngModel)]="element.stock" (ngModelChange)="fieldUpdated()">
+                                           [(ngModel)]="element.amount" (ngModelChange)="fieldUpdated()">
                                 </mat-form-field>
                             </td>
                         </ng-container>
