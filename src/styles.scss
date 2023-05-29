@@ -27,6 +27,34 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+main {
+    padding: 24px 12px;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+    &.atm-md {
+        max-width: 640px;
+    }
+
+    &.atm-sm {
+        max-width: 480px;
+    }
+}
+
 .mdc-button {
     text-transform: uppercase;
+}
+
+.atm-page {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+}
+
+.mdc-card__actions.atm-card-actions {
+    justify-content: flex-end;
+    padding: 0 16px 16px;
 }

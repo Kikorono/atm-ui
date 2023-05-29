@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class WithdrawComponent {
 
+    withdrawAmount: number | null = null;
+
+    get submitDisabled(): boolean {
+        return this.withdrawAmount === null || this.withdrawAmount === 0;
+    }
+
 }
