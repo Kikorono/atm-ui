@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { BillStock } from '../../model/bill.model';
-import { AtmRepository } from '../../stores/atm/atm.repository';
-import { defaultState } from '../../stores/atm/atm.store';
+import { BillStock, billTypes } from '../../model/bill.model';
+import { AtmService } from '../../services/atm.service';
 
 @Component({
     selector: 'atm-restock',
     templateUrl: './restock.component.html',
     styleUrls: ['./restock.component.scss']
 })
-export class RestockComponent {
+export class RestockComponent implements OnInit {
 
     // @todo Kiko - 29/05/23 - Prevent negative number inputs
 
     readonly stockDisplayedColumns: string[] = ['bill', 'stock'];
 
-    stockDataSource: BillStock[];
+    stockDataSource: BillStock[] = [];
     currentStock: BillStock[] = [];
     updated: boolean = false;
 
     constructor(
-        private atmRepository: AtmRepository,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private atmService: AtmService
     ) {
-        this.stockDataSource = this.atmRepository.getStock();
+    }
+
+    async ngOnInit(): Promise<void> {
+        this.stockDataSource = await this.atmService.getAllBillStocks();
         this.cloneStock();
     }
 
@@ -47,8 +49,8 @@ export class RestockComponent {
     /**
      * Update the ATM stock with the values input into the table.
      */
-    updateStock(): void {
-        this.atmRepository.updateStock(this.stockDataSource);
+    async updateStock(): Promise<void> {
+        this.stockDataSource = await this.atmService.updateBillStocks(this.stockDataSource);
         this.cloneStock();
         this.snackBar.open('Stock updated successfully', 'Close');
         this.updated = false;
@@ -58,7 +60,10 @@ export class RestockComponent {
      * Sets the stock fields to their default values.
      */
     setDefaults(): void {
-        this.stockDataSource = JSON.parse(JSON.stringify(defaultState.stock)) as BillStock[];
+        this.stockDataSource = billTypes.map(bill => ({
+            bill,
+            amount: 10
+        }));
         this.fieldUpdated();
     }
 

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AtmRepository } from '../../stores/atm/atm.repository';
 
 import { BillStock, billTypes } from '../../model/bill.model';
 import { Transaction } from '../../model/transaction.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AtmService } from '../../services/atm.service';
 
 @Component({
     selector: 'atm-withdraw',
@@ -17,18 +17,18 @@ export class WithdrawComponent {
     transactionFailed: boolean = false;
 
     constructor(
-        private atmRepository: AtmRepository,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private atmService: AtmService
     ) {
     }
 
-    submitWithdrawal(): void {
+    async submitWithdrawal(): Promise<void> {
         if (!this.withdrawAmount || this.withdrawAmount < 0) {
             // User did not enter anything, entered 0, or entered a negative number -, don't do anything
             return;
         }
 
-        const currentStock = JSON.parse(JSON.stringify(this.atmRepository.getStock())) as BillStock[];
+        const currentStock = await this.atmService.getAllBillStocks();
 
         const totalBills: BillStock[] = [];
         let cashRemainder = this.withdrawAmount;
@@ -73,19 +73,19 @@ export class WithdrawComponent {
             successful
         };
 
-        this.atmRepository.addTransaction(transaction);
-
         this.withdrawAmount = null;
 
         if (successful) {
             // Success!
             this.transaction = transaction;
-            this.atmRepository.updateStock(currentStock);
+            await this.atmService.updateBillStocks(currentStock);
             this.snackBar.open('Transaction successful', 'Close');
         } else {
             // Error, not enough stock
             this.transactionFailed = true;
         }
+
+        await this.atmService.addTransaction(transaction);
     }
 
     reset(): void {

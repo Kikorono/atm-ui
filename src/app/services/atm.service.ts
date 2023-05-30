@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BillStock } from '../../model/bill.model';
 import { lastValueFrom } from 'rxjs';
-import { Transaction } from '../../model/transaction.model';
-import { AtmRepository } from './atm.repository';
+
+import { BillStock } from '../model/bill.model';
+import { Transaction } from '../model/transaction.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AtmService {
 
-    constructor(private http: HttpClient, private atmRepository: AtmRepository) {
+    constructor(private http: HttpClient) {
     }
 
     async addTransaction(transaction: Transaction): Promise<Transaction> {
