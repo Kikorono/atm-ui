@@ -28,7 +28,7 @@ export class WithdrawComponent {
             return;
         }
 
-        const currentStock = this.atmRepository.getStock();
+        const currentStock = JSON.parse(JSON.stringify(this.atmRepository.getStock())) as BillStock[];
 
         const totalBills: BillStock[] = [];
         let cashRemainder = this.withdrawAmount;
@@ -74,6 +74,8 @@ export class WithdrawComponent {
         };
 
         this.atmRepository.addTransaction(transaction);
+        
+        this.withdrawAmount = null;
 
         if (successful) {
             // Success!
