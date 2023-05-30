@@ -31,7 +31,6 @@ export const getStateFromStorage = (): AtmState | null => {
 };
 
 export const saveStateToStorage = (state: AtmState): void => {
-    console.log(`Saving state...`, state);
     localStorage.setItem('atm_state', JSON.stringify(state));
 }
 
