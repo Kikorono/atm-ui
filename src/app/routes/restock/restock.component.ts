@@ -13,6 +13,8 @@ import { defaultState } from '../../stores/atm/atm.store';
 })
 export class RestockComponent {
 
+    // @todo Kiko - 29/05/23 - Prevent negative number inputs
+
     readonly stockDisplayedColumns: string[] = ['bill', 'stock'];
 
     stockDataSource: BillStock[];
