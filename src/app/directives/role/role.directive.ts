@@ -48,7 +48,12 @@ export class RoleDirective implements OnInit, OnDestroy {
     }
 
     private hasRole() {
-        return this.loggedInUser?.['https://atm-project.dev/roles']?.includes(this.requiredRole);
+        if (this.requiredRole.startsWith('!')) {
+            const notAllowedRole = this.requiredRole.substring(1);
+            return !this.loggedInUser?.['https://atm-project.dev/roles']?.includes(notAllowedRole);
+        } else {
+            return this.loggedInUser?.['https://atm-project.dev/roles']?.includes(this.requiredRole);
+        }
     }
 
 }
