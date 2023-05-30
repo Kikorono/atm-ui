@@ -20,7 +20,6 @@ import { AppComponent } from './app.component';
         HttpClientModule,
         AuthModule.forRoot({
             domain: 'atm-project.us.auth0.com',
-            // audience: '',
             clientId: 'hweQdHgl8ybLnr7hAOVUkdonZY51cm9g',
             errorPath: '/auth/login',
             cacheLocation: 'localstorage',
@@ -28,7 +27,8 @@ import { AppComponent } from './app.component';
                 allowedList: ['/api/*'],
             },
             authorizationParams: {
-                redirect_uri: window.location.origin
+                redirect_uri: window.location.origin,
+                audience: 'atm-api'
             }
         })
     ],
