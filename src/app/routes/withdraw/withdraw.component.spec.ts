@@ -37,7 +37,8 @@ describe('WithdrawComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    describe('submitWithdrawal', () => {
-
-    });
+    // @todo Kiko - 29/05/23 - Write WithdrawComponent tests
+    // describe('submitWithdrawal', () => {
+    //
+    // });
 });
