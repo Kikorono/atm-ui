@@ -36,4 +36,8 @@ describe('WithdrawComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    describe('submitWithdrawal', () => {
+
+    });
 });
