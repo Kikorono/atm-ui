@@ -11,14 +11,14 @@
         <button mat-button routerLink="/withdraw" routerLinkActive="atm-active">Withdraw</button>
     </nav>
 
-    <!--
-    Disabled until user auth and session handling is added
-
     <mat-divider [vertical]="true"></mat-divider>
 
-    <button mat-flat-button class="atm-login" color="accent" *ngIf="!loggedIn; else loggedOutTemplate">Login</button>
+    <button mat-flat-button class="atm-logout" color="warn"
+            *ngIf="(auth.isAuthenticated$ | async); else loggedOutTemplate"
+            (click)="logout()">Logout</button>
 
     <ng-template #loggedOutTemplate>
-        <button mat-flat-button class="atm-logout" color="warn">Logout</button>
-    </ng-template>-->
+        <button mat-flat-button class="atm-login" color="accent"
+                (click)="login()">Login</button>
+    </ng-template>
 </mat-toolbar>

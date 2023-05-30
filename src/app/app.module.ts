@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,11 +17,29 @@ import { AppComponent } from './app.component';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
+        AuthModule.forRoot({
+            domain: 'atm-project.us.auth0.com',
+            // audience: '',
+            clientId: 'hweQdHgl8ybLnr7hAOVUkdonZY51cm9g',
+            errorPath: '/auth/login',
+            cacheLocation: 'localstorage',
+            httpInterceptor: {
+                allowedList: ['/api/*'],
+            },
+            authorizationParams: {
+                redirect_uri: window.location.origin
+            }
+        })
     ],
     providers: [
         // SnackBar duration set to 3 seconds
-        {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000}}
+        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000} },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthHttpInterceptor,
+            multi: true,
+        }
     ],
     bootstrap: [AppComponent]
 })
