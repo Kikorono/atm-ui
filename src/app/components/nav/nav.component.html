@@ -7,14 +7,14 @@
 
     <nav>
         <button mat-button routerLink="/" routerLinkActive="atm-active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
-        <button mat-button routerLink="/restock" routerLinkActive="atm-active">Restock</button>
+        <button mat-button routerLink="/restock" routerLinkActive="atm-active" *atmRole="'atm-admin'">Restock</button>
         <button mat-button routerLink="/withdraw" routerLinkActive="atm-active">Withdraw</button>
     </nav>
 
     <mat-divider [vertical]="true"></mat-divider>
 
     <button mat-flat-button class="atm-logout" color="warn"
-            *ngIf="(auth.isAuthenticated$ | async); else loggedOutTemplate"
+            *ngIf="(isAuthenticated$ | async); else loggedOutTemplate"
             (click)="logout()">Logout</button>
 
     <ng-template #loggedOutTemplate>

@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 
 import { NavComponent } from './nav.component';
+import { RoleModule } from '../../directives/role/role.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NavComponent } from './nav.component';
         MatToolbarModule,
         MatButtonModule,
         MatDividerModule,
-        AuthModule
+        AuthModule,
+        RoleModule
     ],
     exports: [
         NavComponent

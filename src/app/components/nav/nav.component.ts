@@ -8,9 +8,9 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class NavComponent {
 
-    loggedIn: boolean = false;
+    readonly isAuthenticated$ = this.auth.isAuthenticated$;
 
-    constructor(public auth: AuthService) {
+    constructor(private auth: AuthService) {
     }
 
     logout(): void {
