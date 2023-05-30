@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { NavModule } from '../../components/nav/nav.module';
+import { TransactionModule } from '../../components/transaction/transaction.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 describe('HomeComponent', () => {
     let component: HomeComponent;
@@ -8,7 +13,14 @@ describe('HomeComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [HomeComponent]
+            declarations: [HomeComponent],
+            imports: [
+                NavModule,
+                TransactionModule,
+                RouterTestingModule,
+                MatTableModule,
+                MatCardModule
+            ]
         });
         fixture = TestBed.createComponent(HomeComponent);
         component = fixture.componentInstance;
