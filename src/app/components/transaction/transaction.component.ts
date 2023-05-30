@@ -26,6 +26,9 @@ export class TransactionComponent implements OnChanges {
     @Input()
     iconColor: ThemePalette = 'primary';
 
+    @Input()
+    showBills: boolean = true;
+
     dataSource: BillStock[];
 
     constructor() {

@@ -31,6 +31,7 @@
                                  [icon]="transaction.successful ? 'check_circle' : 'cancel'"
                                  [iconColor]="transaction.successful ? 'primary' : 'warn'"
                                  [header]="transaction.successful ? 'Successful Transaction' : 'Failed Transaction'"
+                                 [showBills]="transaction.successful"
                                  class="atm-transaction-receipt"></atm-transaction>
             </ng-container>
 

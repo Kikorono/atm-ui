@@ -62,11 +62,25 @@ export class WithdrawComponent {
                 totalBills.push({
                     bill,
                     amount: billCount
-                })
+                });
             }
         }
 
         const successful = cashRemainder === 0;
+
+        if (!successful) {
+            // If unsuccessful, add the remaining needed as one dollar bills so that we can
+            // still display the total requested in the Transaction component
+            const oneStock = totalBills.find(b => b.bill === 1);
+            if (oneStock) {
+                oneStock.amount += cashRemainder;
+            } else {
+                totalBills.push({
+                    bill: 1,
+                    amount: cashRemainder
+                });
+            }
+        }
 
         const transaction: Transaction = {
             bills: totalBills,
