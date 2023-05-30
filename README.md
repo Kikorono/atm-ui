@@ -1,6 +1,16 @@
 # ATM UI Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
+ATM UI project, utilizing [Angular v16](https://github.com/angular).
+
+The matching backend for this project can be found here: [https://github.com/Kikorono/atm-api](https://github.com/Kikorono/atm-api)
+
+## Prerequisites
+
+* NodeJS v16+
+
+### Local development
+
+The [backend service](https://github.com/Kikorono/atm-api) must first be running locally to run the ATM UI project locally. See the [backend repository](https://github.com/Kikorono/atm-api) for instructions on setting up the backend.
 
 ## Development server
 
