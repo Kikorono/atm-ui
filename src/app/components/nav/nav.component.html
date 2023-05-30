@@ -11,11 +11,14 @@
         <button mat-button routerLink="/restock" routerLinkActive="atm-active">Restock</button>
     </nav>
 
+    <!--
+    Disabled until user auth and session handling is added
+    
     <mat-divider [vertical]="true"></mat-divider>
 
     <button mat-flat-button class="atm-login" color="accent" *ngIf="!loggedIn; else loggedOutTemplate">Login</button>
 
     <ng-template #loggedOutTemplate>
         <button mat-flat-button class="atm-logout" color="warn">Logout</button>
-    </ng-template>
+    </ng-template>-->
 </mat-toolbar>

@@ -74,7 +74,7 @@ export class WithdrawComponent {
         };
 
         this.atmRepository.addTransaction(transaction);
-        
+
         this.withdrawAmount = null;
 
         if (successful) {

@@ -35,7 +35,6 @@ export class TransactionComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['transaction']?.currentValue) {
             this.dataSource = changes['transaction']?.currentValue?.bills || [];
-            console.log(this.dataSource);
         }
     }
 
