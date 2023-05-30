@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BillStock } from '../../model/bill.model';
 import { AtmRepository } from '../../stores/atm/atm.repository';
+import { defaultState } from '../../stores/atm/atm.store';
 
 @Component({
     selector: 'atm-restock',
@@ -49,6 +50,14 @@ export class RestockComponent {
         this.cloneStock();
         this.snackBar.open('Stock updated successfully', 'Close');
         this.updated = false;
+    }
+
+    /**
+     * Sets the stock fields to their default values.
+     */
+    setDefaults(): void {
+        this.stockDataSource = JSON.parse(JSON.stringify(defaultState.stock)) as BillStock[];
+        this.fieldUpdated();
     }
 
     cloneStock(): void {

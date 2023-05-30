@@ -7,7 +7,7 @@ export interface AtmState {
     transactions: Transaction[];
 }
 
-const defaultState: AtmState = {
+export const defaultState: AtmState = {
     stock: billTypes.map(bill => ({
         bill,
         amount: 10

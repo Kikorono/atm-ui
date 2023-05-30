@@ -77,4 +77,8 @@ main, .atm-full {
 .mdc-card__actions.atm-card-actions {
     justify-content: flex-end;
     padding: 0 16px 16px;
+
+    button + button {
+        margin-left: 8px;
+    }
 }
